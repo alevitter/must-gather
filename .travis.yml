@@ -8,7 +8,7 @@ jobs:
     if: tag IS present
     before_script: skip
     script: 
-    - echo "$QUAY_PASSWORD" | docker login -u "$QUAY_USERNAME" --password-stdin  quay.io
+    - docker login -u "$QUAY_USERNAME" -p "QUAY_PASSWORD" quay.io
     #- make build "IMAGE_TAG=$TRAVIS_TAG"
 env:
   global:
