@@ -9,6 +9,7 @@ jobs:
     before_script: skip
     script:
     - echo "$QUAY_PASSWORD" | docker login -u "$QUAY_USERNAME" --password-stdin  quay.io
+    - make build MUSTGATHER_IMAGE=alevitte/must-gather
 env:
   global:
     #QUAY_USERNAME
