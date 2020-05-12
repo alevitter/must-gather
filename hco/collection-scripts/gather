@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Resource list
+resources=()
+
+# KubeVirt HCO related namespaces
+resources+=(ns/openshift-cnv ns/kubevirt-hyperconverged ns/openshift-operator-lifecycle-manager ns/openshift-marketplace)
+
+# HCO
+resources+=(catalogsource clusterserviceversion)
+
+# Run the collection of resources using must-gather
+for resource in ${resources[@]}; do
+  /usr/bin/oc adm inspect --dest-dir must-gather --all-namespaces ${resource}
+done
+
+# Collect HCO details (first, because it's there before anything else)
+/usr/bin/gather_hco
+
+exit 0
